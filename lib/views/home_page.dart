@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:geo_loc/views/vista.dart';
+import 'package:geo_loc/views/datos.dart';
+// ignore: depend_on_referenced_packages
 import 'package:geolocator/geolocator.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -11,6 +12,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _locationMessage = "";
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +22,13 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Geolocalización'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(_locationMessage),
-          ],
-        ),
+        child: _isLoading
+            ? const CircularProgressIndicator()
+            : Column(
+                children: <Widget>[
+                  Text(_locationMessage),
+                ],
+              ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _getCurrentLocationAndNavigate,
@@ -36,19 +39,40 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _getCurrentLocationAndNavigate() async {
-    final result = await _fetchCurrentLocation();
+    setState(() {
+      _isLoading = true; // Muestra el indicador de carga
+    });
 
-    if (result != null) {
+    // Navega a MyHomePage2 con valores iniciales
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const MyHomePage2(
+          latitude: 0.0,
+          longitude: 0.0,
+        ),
+      ),
+    );
+
+    // Obtén la ubicación en segundo plano y actualiza la vista
+    final position = await _fetchCurrentLocation();
+
+    if (position != null) {
+      Navigator.of(context).pop(); // Cierra la vista anterior
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => MyHomePage2(
-            latitude: result.latitude,
-            longitude: result.longitude,
+            latitude: position.latitude,
+            longitude: position.longitude,
           ),
         ),
       );
     }
+
+    setState(() {
+      _isLoading = false; // Oculta el indicador de carga
+    });
   }
 
   Future<Position?> _fetchCurrentLocation() async {

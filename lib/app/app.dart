@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:geo_loc/views/home_page.dart';
+import 'package:geo_loc/views/index.dart';
+
+
+
 
 
 
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  MyHomePage(),
+      home:  MyHome(),
     );
   }
 }

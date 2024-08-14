@@ -6,6 +6,8 @@ import 'package:geo_loc/views/Pruebas/providers/Auth_provider.dart';
 import 'package:geo_loc/views/Pruebas/providers/nombreProvider.dart';
 import 'package:geo_loc/views/Pruebas/providers/provider_counter.dart';
 import 'package:geo_loc/views/Pruebas/providers/task_provider.dart';
+import 'package:geo_loc/views/Pruebas/providers/tiempo_real.dart';
+import 'package:geo_loc/views/Pruebas/providers/ubicacionProvider.dart';
 import 'package:provider/provider.dart';
 
 
@@ -17,6 +19,10 @@ void main() {
     ChangeNotifierProvider(create: (_)=> TaskProvider()),
     ChangeNotifierProvider(create: (context) => AuthProvider()), 
     ChangeNotifierProvider(create: (context) => DataProvider()),
+    ChangeNotifierProvider(create: (context) => LocationUbiProvider()),  
+    ChangeNotifierProvider(create: (context) => LocProvider()),
+
+    
   ],
   child: const MyApp()));
 }

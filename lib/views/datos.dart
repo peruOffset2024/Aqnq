@@ -1,30 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:geo_loc/providers/LocationProvider.dart';
 import 'package:provider/provider.dart';
+import 'package:geo_loc/providers/LocationProvider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class MyHomePage2 extends StatefulWidget {
-  final double latitude;
-  final double longitude;
-
-  const MyHomePage2({
-    super.key,
-    required this.latitude,
-    required this.longitude,
-  });
+  const MyHomePage2({super.key});
 
   @override
-  _MyHomePage2State createState() => _MyHomePage2State();
+  State<MyHomePage2> createState() => _MyHomePage2State();
 }
 
 class _MyHomePage2State extends State<MyHomePage2> {
   final TextEditingController _commentController = TextEditingController();
+
   final String _nombre = 'Ricardo';
+
   String _userComment = '';
+
   final List<File> _selectedImages = [];
+
   final ImagePicker _picker = ImagePicker();
-  
+
   @override
   Widget build(BuildContext context) {
     // Obtenemos el LocationProvider
@@ -105,19 +102,24 @@ class _MyHomePage2State extends State<MyHomePage2> {
               ),
               // Mostrar ubicación obtenida
               const SizedBox(height: 20),
-              Text(
-                'Latitud: ${widget.latitude}',
-                style: const TextStyle(fontSize: 16),
-              ),
-              Text(
-                'Longitud: ${widget.longitude}',
-                style: const TextStyle(fontSize: 16),
-              ),
-              // Mensaje de ubicación desde el provider
-              Text(
-                'Mensaje de ubicación: ${locationProvider.locationMessage}',
-                style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
-              ),
+              if (locationProvider.currentPosition != null)
+                Column(
+                  children: [
+                    Text(
+                      'Latitud: ${locationProvider.currentPosition!.latitude}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    Text(
+                      'Longitud: ${locationProvider.currentPosition!.longitude}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+              if (locationProvider.locationMessage.isNotEmpty)
+                Text(
+                  'Mensaje de ubicación: ${locationProvider.locationMessage}',
+                  style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                ),
             ],
           ),
         ),

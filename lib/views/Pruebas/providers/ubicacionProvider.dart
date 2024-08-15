@@ -3,21 +3,28 @@ import 'package:geolocator/geolocator.dart';
 
 class LocationUbiProvider with ChangeNotifier {
   Position? _currentPosition;
+  Stream<Position>? _positionStream;
+  String? _palabra;
 
   Position? get currentPosition => _currentPosition;
+  String? get palabra => _palabra;
 
-  // Método público para iniciar la obtención de la ubicación.
-  void fetchLocation() async {
-    try {
-      // Obtiene la ubicación en segundo plano.
-      _currentPosition = await Geolocator.getCurrentPosition(
-        // ignore: deprecated_member_use
-        desiredAccuracy: LocationAccuracy.high,
-      );
-      notifyListeners(); // Notifica a los widgets que la ubicación ha sido obtenida.
-    } catch (e) {
-      // ignore: avoid_print
-      print('Error al obtener la ubicación: $e');
-    }
+  void palabraActu(String name){
+    _palabra = name;
+    notifyListeners();
+  }
+
+  LocationUbiProvider() {
+    _positionStream = Geolocator.getPositionStream(
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.high,
+        distanceFilter: 10, 
+      ),
+    );
+
+    _positionStream!.listen((Position position) {
+      _currentPosition = position;
+      notifyListeners();
+    });
   }
 }

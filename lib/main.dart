@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geo_loc/app/app.dart';
 import 'package:geo_loc/providers/LocationProvider.dart';
+import 'package:geo_loc/providers/contador_provider.dart';
 import 'package:geo_loc/providers/get_api_provider.dart';
+import 'package:geo_loc/providers/nombre_provider.dart';
 import 'package:geo_loc/views/Pruebas/providers/Auth_provider.dart';
 import 'package:geo_loc/views/Pruebas/providers/nombreProvider.dart';
 import 'package:geo_loc/views/Pruebas/providers/provider_counter.dart';
@@ -20,8 +22,9 @@ void main() {
     ChangeNotifierProvider(create: (context) => AuthProvider()), 
     ChangeNotifierProvider(create: (context) => DataProvider()),
     ChangeNotifierProvider(create: (context) => LocationUbiProvider()),  
-    ChangeNotifierProvider(create: (context) => LocProvider()),
-
+    ChangeNotifierProvider(create: (context) => LocProvider()),  
+    ChangeNotifierProvider(create: (context) => NombreNuevoProvider()),  
+    ChangeNotifierProvider(create: (context) => ContadorProviders()),
     
   ],
   child: const MyApp()));

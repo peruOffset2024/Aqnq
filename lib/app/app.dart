@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geo_loc/routes/Contador_paginas.dart';
+import 'package:geo_loc/routes/apren_provider.dart';
 import 'package:geo_loc/views/index.dart';
 
 
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  MyHome(),
+      home:  ContadorPag(),
     );
   }
 }

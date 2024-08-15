@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:geo_loc/providers/LocationProvider.dart';
 import 'package:geo_loc/views/datos.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
-
+  
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }

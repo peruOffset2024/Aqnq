@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geo_loc/routes/Contador_paginas.dart';
-import 'package:geo_loc/routes/apren_provider.dart';
-import 'package:geo_loc/views/index.dart';
+
 
 
 

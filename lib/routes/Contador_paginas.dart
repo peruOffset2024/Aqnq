@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:geo_loc/providers/contador_provider.dart';
-import 'package:geo_loc/views/Pruebas/providers/provider_counter.dart';
 import 'package:provider/provider.dart';
 
 class ContadorPag extends StatelessWidget {

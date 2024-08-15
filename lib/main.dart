@@ -13,7 +13,8 @@ import 'package:geo_loc/views/Pruebas/providers/ubicacionProvider.dart';
 import 'package:provider/provider.dart';
 
 
-void main() {
+void main()  async {
+ 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_)=> LocationProvider(),),
     ChangeNotifierProvider(create: (_)=> CounterProvider()),  
@@ -24,7 +25,8 @@ void main() {
     ChangeNotifierProvider(create: (context) => LocationUbiProvider()),  
     ChangeNotifierProvider(create: (context) => LocProvider()),  
     ChangeNotifierProvider(create: (context) => NombreNuevoProvider()),  
-    ChangeNotifierProvider(create: (context) => ContadorProviders()),
+    ChangeNotifierProvider(create: (context) => ContadorProviders()), 
+  
     
   ],
   child: const MyApp()));
